@@ -8,7 +8,8 @@ class Student:
         self.grades = {}
 
     def rate_lecture(self, lecturer, course, grade):
-        if isinstance(lecturer, Lecturer) and course in lecturer.courses_attached and (self.courses_in_progress or self.finished_courses):
+        if isinstance(lecturer, Lecturer) and course in lecturer.courses_attached and\
+        (self.courses_in_progress or self.finished_courses):
             if grade <= 10:
                 if course in lecturer.grades:
                     lecturer.grades[course] += [grade]
@@ -20,7 +21,7 @@ class Student:
             return 'Ошибка'
 
     # Average grade for all courses
-    def average_grade_for_homework(self, grades):
+    def aver_grade_homework(self, grades):
         count = 0
         for course in grades:
             for grade in grades[course]:
@@ -31,33 +32,39 @@ class Student:
             return "Оценок нет"
 
     def __str__(self):
-        return f'Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за домашние задания: {self.average_grade_for_homework(self.grades)}\n'\
-            f'Курсы в процессе изучения: {", ".join(self.courses_in_progress) if len(self.courses_in_progress) != 0 else "отсутствуют"}\n'\
-            f'Завершенные курсы: {", ".join(self.finished_courses) if len(self.finished_courses) != 0 else "отсутствуют"}'
+        return f'Имя: {self.name}\nФамилия: {self.surname}\n'\
+        f'Средняя оценка за домашние задания: {self.aver_grade_homework(self.grades)}\n'\
+        f'Курсы в процессе изучения: {", ".join(self.courses_in_progress) if len(self.courses_in_progress) != 0 else "отсутствуют"}\n'\
+        f'Завершенные курсы: {", ".join(self.finished_courses) if len(self.finished_courses) != 0 else "отсутствуют"}'
 
     # Operators
     def __gt__(self, other):
         # Terms. If object has class Student and it has type int or float and average is more 0
-        if isinstance(other, Student) and (type(other.average_grade_for_homework(other.grades)) == int or float) and other.average_grade_for_homework(other.grades) > 0:
-            return self.average_grade_for_homework(self.grades) > other.average_grade_for_homework(other.grades)
+        if isinstance(other, Student) and\
+        (type(other.aver_grade_homework(other.grades)) == int or float) and\
+        other.aver_grade_homework(other.grades) > 0:
+            return self.aver_grade_homework(self.grades) > other.aver_grade_homework(other.grades)
         else:
             return 'Ошибка'
     def __lt__(self, other):
         # Terms. If object has class Student and it has type int or float and average is more 0
-        if isinstance(other, Student) and (type(other.average_grade_for_homework(other.grades)) == int or float) and other.average_grade_for_homework(other.grades) > 0:
-            return self.average_grade_for_homework(self.grades) < other.average_grade_for_homework(other.grades)
+        if isinstance(other, Student) and (type(other.aver_grade_homework(other.grades)) == int or float)\ 
+        and other.aver_grade_homework(other.grades) > 0:
+            return self.aver_grade_homework(self.grades) < other.aver_grade_homework(other.grades)
         else:
             return 'Ошибка'
     def __eq__(self, other):
         # Terms. If object has class Student and it has type int or float and average is more 0
-        if isinstance(other, Student) and (type(other.average_grade_for_homework(other.grades)) == int or float) and other.average_grade_for_homework(other.grades) > 0:
-            return self.average_grade_for_homework(self.grades) == other.average_grade_for_homework(other.grades)
+        if isinstance(other, Student) and (type(other.aver_grade_homework(other.grades)) == int or float) and\ 
+        other.aver_grade_homework(other.grades) > 0:
+            return self.aver_grade_homework(self.grades) == other.aver_grade_homework(other.grades)
         else:
             return 'Ошибка'
     def __ne__(self, other):
         # Terms. If object has class Student and it has type int or float and average is more 0
-        if isinstance(other, Student) and (type(other.average_grade_for_homework(other.grades)) == int or float) and other.average_grade_for_homework(other.grades) > 0:
-            return self.average_grade_for_homework(self.grades) != other.average_grade_for_homework(other.grades)
+        if isinstance(other, Student) and (type(other.aver_grade_homework(other.grades)) == int or float) and\ 
+        other.aver_grade_homework(other.grades) > 0:
+            return self.aver_grade_homework(self.grades) != other.aver_grade_homework(other.grades)
         else:
             return 'Ошибка'
 
@@ -85,7 +92,7 @@ class Lecturer(Mentor):
         self.grades = {}
 
     # Average grade for all courses
-    def average_grade_for_lecture(self, grades):
+    def aver_grade_lect(self, grades):
         count = 0
         for course in grades:
             for grade in grades[course]:
@@ -96,31 +103,35 @@ class Lecturer(Mentor):
             return "Оценок нет"
 
     def __str__(self):
-        return f'Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за лекции: {self.average_grade_for_lecture(self.grades)}'
+        return f'Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за лекции: {self.aver_grade_lect(self.grades)}'
 
     # Operators
     def __gt__(self, other):
         # Terms. If object has class Lecturer and it has type int or float and average is more 0
-        if isinstance(other, Lecturer) and (type(other.average_grade_for_lecture(other.grades)) == int or float) and other.average_grade_for_lecture(other.grades) > 0:
-            return self.average_grade_for_lecture(self.grades) > other.average_grade_for_lecture(other.grades)
+        if isinstance(other, Lecturer) and (type(other.aver_grade_lect(other.grades)) == int or float) and\
+        other.aver_grade_lect(other.grades) > 0:
+            return self.aver_grade_lect(self.grades) > other.aver_grade_lect(other.grades)
         else:
             return 'Ошибка'
     def __lt__(self, other):
         # Terms. If object has class Lecturer and it has type int or float and average is more 0
-        if isinstance(other, Lecturer) and (type(other.average_grade_for_lecture(other.grades)) == int or float) and other.average_grade_for_lecture(other.grades) > 0:
-            return self.average_grade_for_lecture(self.grades) < other.average_grade_for_lecture(other.grades)
+        if isinstance(other, Lecturer) and (type(other.aver_grade_lect(other.grades)) == int or float) and\
+        other.aver_grade_lect(other.grades) > 0:
+            return self.aver_grade_lect(self.grades) < other.aver_grade_lect(other.grades)
         else:
             return 'Ошибка'
     def __eq__(self, other):
         # Terms. If object has class Lecturer and it has type int or float and average is more 0
-        if isinstance(other, Lecturer) and (type(other.average_grade_for_lecture(other.grades)) == int or float) and other.average_grade_for_lecture(other.grades) > 0:
-            return self.average_grade_for_lecture(self.grades) == other.average_grade_for_lecture(other.grades)
+        if isinstance(other, Lecturer) and (type(other.aver_grade_lect(other.grades)) == int or float) and\
+        other.aver_grade_lect(other.grades) > 0:
+            return self.aver_grade_lect(self.grades) == other.aver_grade_lect(other.grades)
         else:
             return 'Ошибка'
     def __ne__(self, other):
         # Terms. If object has class Lecturer and it has type int or float and average is more 0
-        if isinstance(other, Lecturer) and (type(other.average_grade_for_lecture(other.grades)) == int or float) and other.average_grade_for_lecture(other.grades) > 0:
-            return self.average_grade_for_lecture(self.grades) != other.average_grade_for_lecture(other.grades)
+        if isinstance(other, Lecturer) and (type(other.aver_grade_lect(other.grades)) == int or float) and\
+        other.aver_grade_lect(other.grades) > 0:
+            return self.aver_grade_lect(self.grades) != other.aver_grade_lect(other.grades)
         else:
             return 'Ошибка'
 
@@ -141,16 +152,33 @@ class Reviewer(Mentor):
     def __str__(self):
         return f'Имя: {self.name}\nФамилия: {self.surname}'
 
-# Function count average grade for students one of course
-def average_grade_for_students(list_of_students, course):
-    count = 0
-    for student in list_of_students:
+
+def average_grade_for_students(list, course):
+    """Function count average grade for students one of course"""
+    count_grade = 0
+    count_student = 0
+    for student in list:
         if course in student.grades:
+            count_student = count_student + 1
+            count = 0
             for i in student.grades[course]:
                 count += i
-        else:
-            return 'Ошибка'
-    return count / len(list_of_students)
+            count_grade += count / len(student.grades[course])
+    return f'Средння оценка студентов по курсу {course} - {count_grade / count_student}'
+
+
+def aver_grade_lectrs(list, course):
+    """Function count average grade for lecturers one of course"""
+    count_grade = 0
+    count_lecturers = 0
+    for lecturer in list:
+        if course in lecturer.grades:
+            count_lecturers = count_lecturers + 1
+            count = 0
+            for i in lecturer.grades[course]:
+                count += i
+            count_grade += count / len(lecturer.grades[course])
+    return f'Средння оценка лекторов по курсу {course} - {count_grade / count_lecturers}'
 
 
 # Quiz
@@ -220,11 +248,11 @@ def average_grade_for_students(list_of_students, course):
 # print()
 # print(student)
 # print()
-# print(student.average_grade_for_homework(student.grades))
-# print(lecturer.average_grade_for_lecture(lecturer.grades))
+# print(student.aver_grade_homework(student.grades))
+# print(lecturer.aver_grade_lect(lecturer.grades))
 #
 #
-#Exercise 4
+# Exercise 4
 # Made objects of classes
 lecturer_1 = Lecturer('Иван', 'Иванов')
 lecturer_2 = Lecturer('Василий', 'Васильев')
@@ -243,7 +271,7 @@ lecturer_2.courses_attached += ['Java', 'C']
 reviewer_1.courses_attached += ['Python', 'C', 'Ruby']
 reviewer_2.courses_attached += ['Java', 'С++']
 
-# Added grades for students and lectors and check rate
+# Added grades for students and lecturers and check rate
 student_1.rate_lecture(lecturer_1, 'Python', 7)
 student_1.rate_lecture(lecturer_1, 'Java', 8)
 student_1.rate_lecture(lecturer_1, 'С++', 4)
@@ -293,7 +321,7 @@ print(student_1)
 print(student_2)
 print()
 
-# Check ==,>,<
+# check ==,>,<
 print(student_1 > student_2)
 print(student_1 < student_2)
 print(student_1 == student_2)
@@ -301,11 +329,19 @@ print()
 print(lecturer_1 < lecturer_2)
 print(lecturer_1 > lecturer_2)
 print(lecturer_1 == lecturer_2)
+
 # check function count average grade for students one of course
+student_2.grades['Python'] = [10, 10, 10]
+list_stud = [student_1, student_2]
+print()
+print(student_1.grades)
+print(student_2.grades)
+print(average_grade_for_students(list_stud, 'Python'))
 
-list_stud= [student_1, student_2]
-average_grade_for_students(list_stud, 'Python')
-print(type(average_grade_for_students))
-print(type(list_stud))
-
-# I need did function, str - 145
+# check function count average grade for lecturers one of course
+lecturer_2.grades['Python'] = [10, 10, 10]
+list_lect = [lecturer_1, lecturer_2]
+print()
+print(lecturer_1.grades)
+print(lecturer_2.grades)
+print(aver_grade_lectrs(list_lect, 'Python'))
